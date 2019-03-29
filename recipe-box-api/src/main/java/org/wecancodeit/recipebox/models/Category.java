@@ -1,12 +1,14 @@
 package org.wecancodeit.recipebox.models;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Categories {
+public class Category {
 
 	@Id
 	@GeneratedValue
@@ -17,9 +19,9 @@ public class Categories {
 	@OneToMany
 	private Collection<Recipe> recipes;
 
-	public Categories() {}
+	public Category() {}
 	
-	public Categories(String category) {
+	public Category(String category) {
 		this.category = category;
 	}
 

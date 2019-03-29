@@ -25,11 +25,11 @@ public class Recipe {
 	private Collection<Ingredient> ingredients;
 	
 	@ManyToOne
-	private Categories category;
+	private Category category;
 	
 	public Recipe() {}
 
-	public Recipe(String recipeName, String instructions, Categories category) {
+	public Recipe(String recipeName, String instructions, Category category) {
 		this.recipeName = recipeName;
 		this.instructions = instructions;
 		this.category = category;
@@ -51,7 +51,7 @@ public class Recipe {
 		return ingredients;
 	}
 
-	public Categories getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 	
