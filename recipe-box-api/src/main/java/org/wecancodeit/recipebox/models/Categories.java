@@ -1,5 +1,7 @@
 package org.wecancodeit.recipebox.models;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
