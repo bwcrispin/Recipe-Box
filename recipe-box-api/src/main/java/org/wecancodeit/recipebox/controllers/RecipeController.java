@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.wecancodeit.recipebox.repositories.CategoryRepository;
 import org.wecancodeit.recipebox.repositories.IngredientRepository;
 import org.wecancodeit.recipebox.repositories.RecipeRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/recipes")
 public class RecipeController {

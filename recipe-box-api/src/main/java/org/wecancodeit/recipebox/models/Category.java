@@ -1,6 +1,7 @@
 package org.wecancodeit.recipebox.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -22,7 +23,6 @@ public class Category {
 	private String categoryImage;
 	
 	@OneToMany
-	@JsonIgnore
 	private Collection<Recipe> recipes;
 
 	public Category() {}

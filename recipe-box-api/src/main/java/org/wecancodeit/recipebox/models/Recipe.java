@@ -30,7 +30,8 @@ public class Recipe {
 	@JsonIgnore
 	private Collection<Ingredient> ingredients;
 	
-	@ManyToOne
+	@ManyToOne 
+	@JsonIgnore
 	private Category category;
 	
 	public Recipe() {}
