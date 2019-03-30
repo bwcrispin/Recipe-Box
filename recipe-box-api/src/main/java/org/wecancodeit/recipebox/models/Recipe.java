@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -26,7 +27,7 @@ public class Recipe {
 	@Lob
 	private String recipeImage;
 	
-	@OneToMany
+	@ManyToMany
 	@JsonIgnore
 	private Collection<Ingredient> ingredients;
 	
@@ -36,7 +37,7 @@ public class Recipe {
 	
 	public Recipe() {}
 
-	public Recipe(String recipeName, String instructions, Category category, String recipeImage, Ingredient ...ingredients) {
+	public Recipe(String recipeName, String instructions, Category category, String recipeImage) {
 		this.recipeName = recipeName;
 		this.instructions = instructions;
 		this.category = category;

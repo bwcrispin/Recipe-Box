@@ -253,7 +253,35 @@ function Ingredients(ingredients) {
     return "\n\n                      <li class=\"ingredients\">\n                          <h5 class=\"ingredient-name\">".concat(ingredient.measurement, " ").concat(ingredient.ingredientName, "</h5>\n                      </li>\n                      \n                  ");
   }).join(""), "\n      </ul>\n      </div>\n      ");
 }
-},{}],"js/app.js":[function(require,module,exports) {
+},{}],"js/components/ingredients.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Ingredients;
+
+function Ingredients(ingredients) {
+  return "\n  <div>\n  <ul class=\"Ingredients\">\n  ".concat(ingredients.map(function (ingredient) {
+    return "\n\n                      <li class=\"ingredients\">\n                          <h5 class=\"ingredient-name\">".concat(ingredient.measurement, " ").concat(ingredient.ingredientName, "</h5>\n                      </li>\n                      \n                  ");
+  }).join(""), "\n      </ul>\n      </div>\n      ");
+}
+},{}],"js/components/recipe.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Recipe;
+
+var _ingredients = _interopRequireDefault(require("./ingredients"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Recipe(recipe) {
+  return "\n    <img src=\"".concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n    </ul>\n  ");
+}
+},{"./ingredients":"js/components/ingredients.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
 var _apiActions = _interopRequireDefault(require("./utils/api/api-actions"));
@@ -267,6 +295,8 @@ var _Category = _interopRequireDefault(require("./components/Category"));
 var _Recipes = _interopRequireDefault(require("./components/Recipes"));
 
 var _Ingredients = _interopRequireDefault(require("./components/Ingredients"));
+
+var _recipe = _interopRequireDefault(require("./components/recipe"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -284,12 +314,20 @@ function main() {
       });
     }
   });
+
+  _eventActions.default.on(getAppContext(), 'click', function () {
+    if (event.target.classList.contains('recipe-image')) {
+      _apiActions.default.getRequest("http://localhost:8080/recipes/".concat(event.target.id), function (recipe) {
+        getAppContext().innerHTML = (0, _recipe.default)(recipe);
+      });
+    }
+  });
 }
 
 function getAppContext() {
   return document.querySelector("#app");
 }
-},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -317,7 +355,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60419" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59478" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -492,5 +530,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map
