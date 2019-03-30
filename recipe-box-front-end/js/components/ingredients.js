@@ -1,4 +1,4 @@
-function renderIngredients(ingredients) {
+export default function Ingredients(ingredients) {
   return `
   <div>
   <ul class="Ingredients">

@@ -199,42 +199,56 @@ var _default = {
   on: on
 };
 exports.default = _default;
-},{}],"js/components/categories.js":[function(require,module,exports) {
+},{}],"js/components/Categories.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = renderCategories;
+exports.default = Categories;
 
-function renderCategories(categories) {
+function Categories(categories) {
   return "\n  <div>\n  <ul class=\"categories\">\n  ".concat(categories.map(function (category) {
-    return "\n\n                      <li class=\"category\">\n                          <h5 class=\"category-name\">".concat(category.category, "</h5> \n                          <img class=\"category-image id=\"").concat(category.id, "\" src=\"").concat(category.categoryImage, "\" />                       \n                      </li>\n                      \n                  ");
+    return "\n\n                      <li class=\"category\">\n                          <h5 class=\"category-name\">".concat(category.category, "</h5> \n                          <img class=\"category-image\" id=\"").concat(category.id, "\" src=\"").concat(category.categoryImage, "\" />                       \n                      </li>\n                      \n                  ");
   }).join(""), "\n      </ul>\n      </div>\n      ");
 }
-},{}],"js/components/recipes.js":[function(require,module,exports) {
-function renderRecipes(recipes) {
-  return "\n  <div>\n  <ul class=\"recipes\">\n  ".concat(recipes.map(function (recipe) {
-    return "\n\n                      <li class=\"recipe\">\n                          <h5 class=\"recipe-name\">".concat(recipe.recipeName, "</h5> \n                          <img class=\"recipe-image id=\"").concat(recipe.id, "\" src=\"").concat(recipe.recipeImage, "\" />                       \n                      </li>\n                      \n                  ");
-  }).join(""), "\n      </ul>\n      </div>\n      ");
-}
-},{}],"js/components/category.js":[function(require,module,exports) {
+},{}],"js/components/Recipes.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = listCategories;
+exports.default = Recipes;
 
-var _recipes = _interopRequireDefault(require("./recipes"));
+function Recipes(recipes) {
+  return "\n    <div>\n    <ul class=\"recipes\">\n    ".concat(recipes.map(function (recipe) {
+    return "\n                      <li class=\"recipe\">\n                          <h5 class=\"recipe-name\">".concat(recipe.recipeName, "</h5> \n                          <img class=\"recipe-image\" id=\"").concat(recipe.id, "\" src=\"").concat(recipe.recipeImage, "\" />                       \n                      </li>\n                      \n                  ");
+  }).join(""), "\n      </ul>\n      </div>\n      ");
+}
+},{}],"js/components/Category.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Category;
+
+var _Recipes = _interopRequireDefault(require("./Recipes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function listCategories(category) {
-  return "\n        <h1>".concat(category.categoryImage, "</h1>\n        <h2>").concat(category.category, "</h2>\n        <ul>\n          <li>").concat((0, _recipes.default)(category.recipes), "</li>\n        </ul>    \n      ").join("");
+function Category(category) {
+  return "\n        <img src=\"".concat(category.categoryImage, "\" alt=\"app image\"/>\n        <h2>").concat(category.category, "</h2>   \n        <ul>\n          <li>").concat((0, _Recipes.default)(category.recipes), "</li>\n        </ul>\n      ");
 }
-},{"./recipes":"js/components/recipes.js"}],"js/components/ingredients.js":[function(require,module,exports) {
-function renderIngredients(ingredients) {
+},{"./Recipes":"js/components/Recipes.js"}],"js/components/Ingredients.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Ingredients;
+
+function Ingredients(ingredients) {
   return "\n  <div>\n  <ul class=\"Ingredients\">\n  ".concat(ingredients.map(function (ingredient) {
     return "\n\n                      <li class=\"ingredients\">\n                          <h5 class=\"ingredient-name\">".concat(ingredient.measurement, " ").concat(ingredient.ingredientName, "</h5>\n                      </li>\n                      \n                  ");
   }).join(""), "\n      </ul>\n      </div>\n      ");
@@ -246,13 +260,13 @@ var _apiActions = _interopRequireDefault(require("./utils/api/api-actions"));
 
 var _eventActions = _interopRequireDefault(require("./utils/events/event-actions"));
 
-var _categories = _interopRequireDefault(require("./components/categories"));
+var _Categories = _interopRequireDefault(require("./components/Categories"));
 
-var _category = _interopRequireDefault(require("./components/category"));
+var _Category = _interopRequireDefault(require("./components/Category"));
 
-var _recipes = _interopRequireDefault(require("./components/recipes"));
+var _Recipes = _interopRequireDefault(require("./components/Recipes"));
 
-var _ingredients = _interopRequireDefault(require("./components/ingredients"));
+var _Ingredients = _interopRequireDefault(require("./components/Ingredients"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -260,13 +274,13 @@ main();
 
 function main() {
   _apiActions.default.getRequest('http://localhost:8080/categories', function (categories) {
-    getAppContext().innerHTML = (0, _categories.default)(categories);
+    getAppContext().innerHTML = (0, _Categories.default)(categories);
   });
 
   _eventActions.default.on(getAppContext(), 'click', function () {
     if (event.target.classList.contains('category-image')) {
       _apiActions.default.getRequest("http://localhost:8080/categories/".concat(event.target.id), function (category) {
-        getAppContext().innerHTML = (0, _category.default)(category);
+        getAppContext().innerHTML = (0, _Category.default)(category);
       });
     }
   });
@@ -275,7 +289,7 @@ function main() {
 function getAppContext() {
   return document.querySelector("#app");
 }
-},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/categories":"js/components/categories.js","./components/category":"js/components/category.js","./components/recipes":"js/components/recipes.js","./components/ingredients":"js/components/ingredients.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -303,7 +317,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52191" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60419" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -478,5 +492,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map

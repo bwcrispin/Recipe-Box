@@ -1,4 +1,4 @@
-export default function renderCategories(categories) {
+export default function Categories(categories) {
   return `
   <div>
   <ul class="categories">
@@ -7,7 +7,7 @@ export default function renderCategories(categories) {
 
                       <li class="category">
                           <h5 class="category-name">${category.category}</h5> 
-                          <img class="category-image id="${category.id}" src="${category.categoryImage}" />                       
+                          <img class="category-image" id="${category.id}" src="${category.categoryImage}" />                       
                       </li>
                       
                   `;
