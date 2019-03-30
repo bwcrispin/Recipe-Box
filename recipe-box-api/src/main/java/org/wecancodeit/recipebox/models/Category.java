@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,6 +18,8 @@ public class Category {
 	@GeneratedValue
 	private Long id;
 	private String category;
+	@Lob
+	private String categoryImage;
 	
 	@OneToMany
 	@JsonIgnore
@@ -24,8 +27,9 @@ public class Category {
 
 	public Category() {}
 	
-	public Category(String category) {
+	public Category(String category, String categoryImage) {
 		this.category = category;
+		this.categoryImage = categoryImage;
 		this.recipes = new ArrayList<Recipe>();
 	}
 
@@ -39,6 +43,10 @@ public class Category {
 	
 	public Collection<Recipe> getRecipes() {
 		return recipes;
+	}
+	
+	public String getCategoryImage() {
+		return categoryImage;
 	}
 	
 	public void addRecipe(Recipe recipe) {

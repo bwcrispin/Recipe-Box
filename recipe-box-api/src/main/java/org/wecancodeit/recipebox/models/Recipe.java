@@ -23,6 +23,8 @@ public class Recipe {
 	private String recipeName;
 	@Lob
 	private String instructions;
+	@Lob
+	private String recipeImage;
 	
 	@OneToMany
 	@JsonIgnore
@@ -33,10 +35,11 @@ public class Recipe {
 	
 	public Recipe() {}
 
-	public Recipe(String recipeName, String instructions, Category category, Ingredient ...ingredients) {
+	public Recipe(String recipeName, String instructions, Category category, String recipeImage, Ingredient ...ingredients) {
 		this.recipeName = recipeName;
 		this.instructions = instructions;
 		this.category = category;
+		this.recipeImage = recipeImage;
 		this.ingredients = new ArrayList<Ingredient>();
 	}
 
@@ -54,6 +57,10 @@ public class Recipe {
 
 	public Collection<Ingredient> getIngredients() {
 		return ingredients;
+	}
+	
+	public String getRecipeImage() {
+		return recipeImage;
 	}
 	
 	public void addIngredient(Ingredient ingredient) {
