@@ -28,10 +28,9 @@ public class Ingredient {
 
 	public Ingredient() {}
 	
-	public Ingredient(String measurement, String ingredientName, Recipe ...recipes) {
+	public Ingredient(String measurement, String ingredientName) {
 		this.measurement = measurement;
 		this.ingredientName = ingredientName;
-		this.recipes = Arrays.asList(recipes);
 	}
 
 	public Long getId() {
