@@ -126,11 +126,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 function getRequest(location, callback) {
-  fetch(location);
-  then(function (response) {
+  fetch(location).then(function (response) {
     return response.json();
-  });
-  then(function (data) {
+  }).then(function (data) {
     return callback(data);
   }).catch(function (err) {
     return console.log(err);
@@ -201,6 +199,46 @@ var _default = {
   on: on
 };
 exports.default = _default;
+},{}],"js/components/categories.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = renderCategories;
+
+function renderCategories(categories) {
+  return "\n  <div>\n  <ul class=\"categories\">\n  ".concat(categories.map(function (category) {
+    return "\n\n                      <li class=\"category\">\n                          <h5 class=\"category-name\">".concat(category.category, "</h5> \n                          <img class=\"category-image id=\"").concat(category.id, "\" src=\"").concat(category.categoryImage, "\" />                       \n                      </li>\n                      \n                  ");
+  }).join(""), "\n      </ul>\n      </div>\n      ");
+}
+},{}],"js/components/recipes.js":[function(require,module,exports) {
+function renderRecipes(recipes) {
+  return "\n  <div>\n  <ul class=\"recipes\">\n  ".concat(recipes.map(function (recipe) {
+    return "\n\n                      <li class=\"recipe\">\n                          <h5 class=\"recipe-name\">".concat(recipe.recipeName, "</h5> \n                          <img class=\"recipe-image id=\"").concat(recipe.id, "\" src=\"").concat(recipe.recipeImage, "\" />                       \n                      </li>\n                      \n                  ");
+  }).join(""), "\n      </ul>\n      </div>\n      ");
+}
+},{}],"js/components/category.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = listCategories;
+
+var _recipes = _interopRequireDefault(require("./recipes"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function listCategories(category) {
+  return "\n        <h1>".concat(category.categoryImage, "</h1>\n        <h2>").concat(category.category, "</h2>\n        <ul>\n          <li>").concat((0, _recipes.default)(category.recipes), "</li>\n        </ul>    \n      ").join("");
+}
+},{"./recipes":"js/components/recipes.js"}],"js/components/ingredients.js":[function(require,module,exports) {
+function renderIngredients(ingredients) {
+  return "\n  <div>\n  <ul class=\"Ingredients\">\n  ".concat(ingredients.map(function (ingredient) {
+    return "\n\n                      <li class=\"ingredients\">\n                          <h5 class=\"ingredient-name\">".concat(ingredient.measurement, " ").concat(ingredient.ingredientName, "</h5>\n                      </li>\n                      \n                  ");
+  }).join(""), "\n      </ul>\n      </div>\n      ");
+}
 },{}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -208,8 +246,36 @@ var _apiActions = _interopRequireDefault(require("./utils/api/api-actions"));
 
 var _eventActions = _interopRequireDefault(require("./utils/events/event-actions"));
 
+var _categories = _interopRequireDefault(require("./components/categories"));
+
+var _category = _interopRequireDefault(require("./components/category"));
+
+var _recipes = _interopRequireDefault(require("./components/recipes"));
+
+var _ingredients = _interopRequireDefault(require("./components/ingredients"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+main();
+
+function main() {
+  _apiActions.default.getRequest('http://localhost:8080/categories', function (categories) {
+    getAppContext().innerHTML = (0, _categories.default)(categories);
+  });
+
+  _eventActions.default.on(getAppContext(), 'click', function () {
+    if (event.target.classList.contains('category-image')) {
+      _apiActions.default.getRequest("http://localhost:8080/categories/".concat(event.target.id), function (category) {
+        getAppContext().innerHTML = (0, _category.default)(category);
+      });
+    }
+  });
+}
+
+function getAppContext() {
+  return document.querySelector("#app");
+}
+},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/categories":"js/components/categories.js","./components/category":"js/components/category.js","./components/recipes":"js/components/recipes.js","./components/ingredients":"js/components/ingredients.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -237,7 +303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50233" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52191" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

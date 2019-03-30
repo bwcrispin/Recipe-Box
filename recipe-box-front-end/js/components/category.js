@@ -1,11 +1,12 @@
-export default function listCategories(categories) {
-  return (categories.map(category => {
+import Recipes from './recipes'
+
+export default function listCategories(category) {
       return `
+        <h1>${category.categoryImage}</h1>
+        <h2>${category.category}</h2>
         <ul>
-          <li></li>
-        </ul>
-      <option value=${category.id}>${category.category}</option>    
+          <li>${Recipes(category.recipes)}</li>
+        </ul>    
       `
-  })
-  .join(""));
+  .join("");
 }

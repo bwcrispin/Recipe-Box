@@ -1,4 +1,4 @@
-function renderCategories(categories) {
+export default function renderCategories(categories) {
   return `
   <div>
   <ul class="categories">
