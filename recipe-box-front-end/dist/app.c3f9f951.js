@@ -279,7 +279,7 @@ var _ingredients = _interopRequireDefault(require("./ingredients"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Recipe(recipe) {
-  return "\n    <img src=\"".concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n    </ul>\n  ");
+  return "\n    <img src=\"".concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n  ");
 }
 },{"./ingredients":"js/components/ingredients.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
@@ -327,7 +327,7 @@ function main() {
 function getAppContext() {
   return document.querySelector("#app");
 }
-},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -355,7 +355,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59478" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63201" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -530,5 +530,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map

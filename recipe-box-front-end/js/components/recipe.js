@@ -6,6 +6,7 @@ export default function Recipe(recipe) {
     <h2>${recipe.recipeName}</h2>   
     <ul>
       <li>${Ingredients(recipe.ingredients)}</li>
+      <li>${recipe.instructions}</li>
     </ul>
   `
 

@@ -28,7 +28,6 @@ public class Recipe {
 	private String recipeImage;
 	
 	@ManyToMany
-	@JsonIgnore
 	private Collection<Ingredient> ingredients;
 	
 	@ManyToOne 
@@ -37,7 +36,7 @@ public class Recipe {
 	
 	public Recipe() {}
 
-	public Recipe(String recipeName, String instructions, Category category, String recipeImage) {
+	public Recipe(String recipeName, String instructions, Category category, String recipeImage, Ingredient ...ingredients) {
 		this.recipeName = recipeName;
 		this.instructions = instructions;
 		this.category = category;
