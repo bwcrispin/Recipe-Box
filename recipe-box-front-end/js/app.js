@@ -70,7 +70,13 @@ events.on(getAppContext(), 'click', () => {
 
 })
 
+events.on(getAppContext(), 'click', () => {
+  if (event.target.classList.contains('js-update-recipe')) {
 
+    api.putRequest(`http://localhost:8080/recipes/update/${event.target.id}`, {
+    }, category => getAppContext().innerHTML = Category(category))
+  }
+})
 
 
 }
