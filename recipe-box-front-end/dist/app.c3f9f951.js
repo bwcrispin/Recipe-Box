@@ -210,7 +210,7 @@ exports.default = Categories;
 function Categories(categories) {
   return "\n  <div>\n  <ul class=\"categories\">\n  ".concat(categories.map(function (category) {
     return "\n\n                      <li class=\"category\">\n                          <h5 class=\"category-name\">".concat(category.category, "</h5> \n                          <img class=\"category-image\" id=\"").concat(category.id, "\" src=\"").concat(category.categoryImage, "\" />                       \n                      </li>\n                      \n                  ");
-  }).join(""), "\n      </ul>\n      </div>\n      ");
+  }).join(""), "\n      </ul>\n      </div>\n\n      ");
 }
 },{}],"js/components/Recipes.js":[function(require,module,exports) {
 "use strict";
@@ -238,7 +238,8 @@ var _Recipes = _interopRequireDefault(require("./Recipes"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Category(category) {
-  return "\n        <img src=\"".concat(category.categoryImage, "\" alt=\"app image\"/>\n        <h2>").concat(category.category, "</h2>   \n        <ul>\n          <li>").concat((0, _Recipes.default)(category.recipes), "</li>\n        </ul>\n      ");
+  console.log(category);
+  return "\n        <img src=\"".concat(category.categoryImage, "\" alt=\"app image\"/>\n        <h2>").concat(category.category, "</h2>   \n        <ul>\n          <li>").concat((0, _Recipes.default)(category.recipes), "</li>\n        </ul>\n\n\n        <section class=\"submit\">\n          <h3>Add a new recipe to this category!</h3>\n          <input type=\"text\" class=\"js-submit-recipe__recipeName\" placeholder=\"Recipe Name\"/>\n          <input type=\"text\" class=\"js-submit-recipe__recipeImage\" placeholder=\"Picture of the recipe\"/>\n          <input type=\"text\" class=\"js-submit-recipe__instructions\" placeholder=\"Recipe Instructions\"/>\n          <button class=\"js-add-recipe__submit\" id=\"").concat(category.id, "\">Add Recipe</button>\n        </section>\n      ");
 }
 },{"./Recipes":"js/components/Recipes.js"}],"js/components/Ingredients.js":[function(require,module,exports) {
 "use strict";
@@ -249,6 +250,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = Ingredients;
 
 function Ingredients(ingredients) {
+  console.log(ingredients);
   return "\n  <div>\n  <ul class=\"Ingredients\">\n  ".concat(ingredients.map(function (ingredient) {
     return "\n\n                      <li class=\"ingredients\">\n                          <h5 class=\"ingredient-name\">".concat(ingredient.measurement, " ").concat(ingredient.ingredientName, "</h5>\n                      </li>\n                      \n                  ");
   }).join(""), "\n      </ul>\n      </div>\n      ");
@@ -262,6 +264,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = Ingredients;
 
 function Ingredients(ingredients) {
+  console.log(ingredients);
   return "\n  <div>\n  <ul class=\"Ingredients\">\n  ".concat(ingredients.map(function (ingredient) {
     return "\n\n                      <li class=\"ingredients\">\n                          <h5 class=\"ingredient-name\">".concat(ingredient.measurement, " ").concat(ingredient.ingredientName, "</h5>\n                      </li>\n                      \n                  ");
   }).join(""), "\n      </ul>\n      </div>\n      ");
@@ -279,7 +282,7 @@ var _ingredients = _interopRequireDefault(require("./ingredients"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Recipe(recipe) {
-  return "\n    <img src=\"".concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n  ");
+  return "\n  <button class=\"js-delete-recipe\" id=\"".concat(recipe.id, "\">Delete this Recipe</button>\n    <img src=\"").concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n  ");
 }
 },{"./ingredients":"js/components/ingredients.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
@@ -322,6 +325,44 @@ function main() {
       });
     }
   });
+
+  _eventActions.default.on(getAppContext(), 'click', function () {
+    if (event.target.classList.contains('js-add-recipe__submit')) {
+      var recipeName = document.querySelector('.js-submit-recipe__recipeName').value;
+      var recipeImage = document.querySelector('.js-submit-recipe__recipeName').value;
+      var instructions = document.querySelector('.js-submit-recipe__instructions').value;
+
+      _apiActions.default.postRequest("http://localhost:8080/recipes/add/".concat(event.target.id), {
+        recipeName: recipeName,
+        recipeImage: recipeImage,
+        instructions: instructions
+      }, function (category) {
+        return getAppContext().innerHTML = (0, _Category.default)(category);
+      });
+    }
+  });
+
+  _eventActions.default.on(getAppContext(), 'click', function () {
+    if (event.target.classList.contains('js-add-ingredient__submit')) {
+      var measurement = document.querySelector('.js-submit-ingredient__measurement').value;
+      var ingredientName = document.querySelector('.js-submit-ingredient__ingredientName').value;
+
+      _apiActions.default.postRequest("http://localhost:8080/ingredients/add/".concat(event.target.id), {
+        measurement: measurement,
+        ingredientName: ingredientName
+      }, function (recipe) {
+        return getAppContext().innerHTML = (0, _recipe.default)(recipe);
+      });
+    }
+  });
+
+  _eventActions.default.on(getAppContext(), 'click', function () {
+    if (event.target.classList.contains('js-delete-recipe')) {
+      _apiActions.default.deleteRequest("http://localhost:8080/recipes/delete/".concat(event.target.id), {}, function (category) {
+        return getAppContext().innerHTML = (0, _Category.default)(category);
+      });
+    }
+  });
 }
 
 function getAppContext() {
@@ -355,7 +396,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63201" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52369" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

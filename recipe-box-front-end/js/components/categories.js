@@ -15,5 +15,6 @@ export default function Categories(categories) {
       .join("")}
       </ul>
       </div>
+
       `;
 }

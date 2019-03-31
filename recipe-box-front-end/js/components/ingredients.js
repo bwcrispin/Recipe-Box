@@ -1,4 +1,5 @@
 export default function Ingredients(ingredients) {
+    console.log(ingredients)
   return `
   <div>
   <ul class="Ingredients">
