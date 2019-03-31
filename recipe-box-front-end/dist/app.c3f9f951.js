@@ -159,22 +159,7 @@ function putRequest(location, requestBody, callback) {
   }).catch(function (err) {
     return console.log(err);
   });
-} // function patchRequest(location, requestBody, callback) {
-//   fetch(location, {
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//       'Access-Control-Allow-Method': PATCH,
-//       'Authorization': ''
-//     },
-//           method: "PATCH",
-//           body: JSON.stringify(requestBody)
-//       })
-//       .then(response => response.json())
-//       .then(data => callback(data))
-//       .catch(err => console.log(err))
-// }
-
+}
 
 function deleteRequest(location, requestBody, callback) {
   fetch(location, {
@@ -237,8 +222,8 @@ exports.default = Recipes;
 
 function Recipes(recipes) {
   return "\n    <div>\n    <ul class=\"recipes\">\n    ".concat(recipes.map(function (recipe) {
-    return "\n                      <li class=\"recipe\">\n                          <h5 class=\"recipe-name\">".concat(recipe.recipeName, "</h5> \n                          <img class=\"recipe-image\" id=\"").concat(recipe.id, "\" src=\"").concat(recipe.recipeImage, "\" />                       \n                      </li>\n                      \n                  ");
-  }).join(""), "\n      </ul>\n      </div>\n      ");
+    return "\n                      <li class=\"recipe\">\n                          <h5 class=\"recipe-name\">".concat(recipe.recipeName, "</h5> \n                          <img class=\"recipe-image\" id=\"").concat(recipe.id, "\" src=\"").concat(recipe.recipeImage, "\" />                       \n                      </li>\n                      \n      <section class=\"delete\">\n        <h3>Delete this recipe?</h3>\n        <button class=\"js-delete-recipe__submit\" id=\"").concat(recipe.id, "\">Delete Recipe</button>\n      </section>\n                  ");
+  }).join(""), "\n      </ul>\n      </div>\n\n\n\n      ");
 }
 },{}],"js/components/Category.js":[function(require,module,exports) {
 "use strict";
@@ -372,16 +357,16 @@ function main() {
   });
 
   _eventActions.default.on(getAppContext(), 'click', function () {
-    if (event.target.classList.contains('js-delete-recipe')) {
-      _apiActions.default.deleteRequest("http://localhost:8080/recipes/delete/".concat(event.target.id), {}, function (category) {
+    if (event.target.classList.contains('js-update-recipe')) {
+      _apiActions.default.putRequest("http://localhost:8080/recipes/update/".concat(event.target.id), {}, function (category) {
         return getAppContext().innerHTML = (0, _Category.default)(category);
       });
     }
   });
 
   _eventActions.default.on(getAppContext(), 'click', function () {
-    if (event.target.classList.contains('js-update-recipe')) {
-      _apiActions.default.putRequest("http://localhost:8080/recipes/update/".concat(event.target.id), {}, function (category) {
+    if (event.target.classList.contains('js-delete-recipe__submit')) {
+      _apiActions.default.postRequest("http://localhost:8080/recipes/delete/".concat(event.target.id), {}, function (category) {
         return getAppContext().innerHTML = (0, _Category.default)(category);
       });
     }
@@ -391,7 +376,7 @@ function main() {
 function getAppContext() {
   return document.querySelector("#app");
 }
-},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -419,7 +404,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60258" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59091" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -594,5 +579,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map

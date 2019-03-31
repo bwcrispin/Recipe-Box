@@ -1,13 +1,12 @@
 package org.wecancodeit.recipebox.models;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,8 +30,18 @@ public class Ingredient {
 	public Ingredient(String measurement, String ingredientName) {
 		this.measurement = measurement;
 		this.ingredientName = ingredientName;
+		this.recipes = new ArrayList<Recipe>();
+	}
+	
+	public void addRecipeToIngredient(Recipe recipe) {
+		recipes.add(recipe);
+	}
+	
+	public void removeRecipeFromIngredient(Recipe recipe) {
+		recipes.remove(recipe);
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,6 +57,7 @@ public class Ingredient {
 	public Collection<Recipe> getRecipe() {
 		return recipes;
 	}
+	
 	
 	
 }
