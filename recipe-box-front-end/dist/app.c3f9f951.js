@@ -159,7 +159,22 @@ function putRequest(location, requestBody, callback) {
   }).catch(function (err) {
     return console.log(err);
   });
-}
+} // function patchRequest(location, requestBody, callback) {
+//   fetch(location, {
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'Access-Control-Allow-Method': PATCH,
+//       'Authorization': ''
+//     },
+//           method: "PATCH",
+//           body: JSON.stringify(requestBody)
+//       })
+//       .then(response => response.json())
+//       .then(data => callback(data))
+//       .catch(err => console.log(err))
+// }
+
 
 function deleteRequest(location, requestBody, callback) {
   fetch(location, {
@@ -282,7 +297,7 @@ var _ingredients = _interopRequireDefault(require("./ingredients"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Recipe(recipe) {
-  return "\n  <button class=\"js-delete-recipe\" id=\"".concat(recipe.id, "\">Delete this Recipe</button>\n    <img src=\"").concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n  ");
+  return "\n  <button class=\"js-delete-recipe\" id=\"".concat(recipe.id, "\">Delete this Recipe</button>\n  <button class=\"js-update-recipe\" id=\"").concat(recipe.id, "\">Update this Recipe</button>\n    <img src=\"").concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n  ");
 }
 },{"./ingredients":"js/components/ingredients.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
@@ -363,12 +378,20 @@ function main() {
       });
     }
   });
+
+  _eventActions.default.on(getAppContext(), 'click', function () {
+    if (event.target.classList.contains('js-update-recipe')) {
+      _apiActions.default.putRequest("http://localhost:8080/recipes/update/".concat(event.target.id), {}, function (category) {
+        return getAppContext().innerHTML = (0, _Category.default)(category);
+      });
+    }
+  });
 }
 
 function getAppContext() {
   return document.querySelector("#app");
 }
-},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils/api/api-actions":"js/utils/api/api-actions.js","./utils/events/event-actions":"js/utils/events/event-actions.js","./components/Categories":"js/components/Categories.js","./components/Category":"js/components/Category.js","./components/Recipes":"js/components/Recipes.js","./components/Ingredients":"js/components/Ingredients.js","./components/recipe":"js/components/recipe.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -396,7 +419,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52369" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60258" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -571,5 +594,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map

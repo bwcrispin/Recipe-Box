@@ -25,6 +25,22 @@ function putRequest(location, requestBody, callback) {
       .catch(err => console.log(err))
 }
 
+// function patchRequest(location, requestBody, callback) {
+//   fetch(location, {
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'Access-Control-Allow-Method': PATCH,
+//       'Authorization': ''
+//     },
+//           method: "PATCH",
+//           body: JSON.stringify(requestBody)
+//       })
+//       .then(response => response.json())
+//       .then(data => callback(data))
+//       .catch(err => console.log(err))
+// }
+
 function deleteRequest(location, requestBody, callback) {
   fetch(location, {
           method: "DELETE",
