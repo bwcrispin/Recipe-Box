@@ -29,6 +29,50 @@ function main() {
       })
     }
   })
+
+  events.on(getAppContext(), 'click', () => {
+    if (event.target.classList.contains('js-add-recipe__submit')) {
+        const recipeName = document.querySelector('.js-submit-recipe__recipeName').value
+        const recipeImage = document.querySelector('.js-submit-recipe__recipeName').value
+        const instructions = document.querySelector('.js-submit-recipe__instructions').value
+
+        api.postRequest(`http://localhost:8080/recipes/add/${event.target.id}`, {
+            recipeName: recipeName,
+            recipeImage: recipeImage,
+            instructions: instructions
+        }, category => getAppContext().innerHTML = Category(category))
+
+    }
+
+})
+
+events.on(getAppContext(), 'click', () => {
+  if (event.target.classList.contains('js-add-ingredient__submit')) {
+      const measurement = document.querySelector('.js-submit-ingredient__measurement').value
+      const ingredientName = document.querySelector('.js-submit-ingredient__ingredientName').value
+
+      api.postRequest(`http://localhost:8080/ingredients/add/${event.target.id}`, {
+          measurement: measurement,
+          ingredientName: ingredientName
+      }, recipe => getAppContext().innerHTML = Recipe(recipe))
+
+  }
+
+})
+
+events.on(getAppContext(), 'click', () => {
+  if (event.target.classList.contains('js-delete-recipe')) {
+
+      api.deleteRequest(`http://localhost:8080/recipes/delete/${event.target.id}`, {
+      }, category => getAppContext().innerHTML = Category(category))
+
+  }
+
+})
+
+
+
+
 }
 
 
