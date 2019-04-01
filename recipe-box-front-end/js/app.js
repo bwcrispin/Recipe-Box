@@ -69,13 +69,10 @@ events.on(getAppContext(), 'click', () => {
 })
 
 events.on(getAppContext(), 'click', () => {
-  if (event.target.classList.contains('js-update-recipe__submit')) {
-    const instructions = document.querySelector('.js-update-recipe__instructions').value
+  if (event.target.classList.contains('js-delete-recipe__submit')) {
 
-    api.postRequest(`http://localhost:8080/recipes/edit/${event.target.id}`, {
-      instructions: instructions
-    }, recipe => getAppContext().innerHTML = Recipe(recipe))
-
+    api.postRequest(`http://localhost:8080/recipes/delete/${event.target.id}`, {
+    }, category => getAppContext().innerHTML = Category(category))
   }
 })
 

@@ -7,5 +7,4 @@ import org.wecancodeit.recipebox.models.Ingredient;
 @Repository
 public interface IngredientRepository extends CrudRepository<Ingredient, Long>{
 
-
 }
