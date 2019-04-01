@@ -9,10 +9,17 @@ export default function Recipes(recipes) {
                           <img class="recipe-image" id="${recipe.id}" src="${recipe.recipeImage}" />                       
                       </li>
                       
+      <section class="delete">
+        <h3>Delete this recipe?</h3>
+        <button class="js-delete-recipe__submit" id="${recipe.id}">Delete Recipe</button>
+      </section>
                   `;
       })
       .join("")}
       </ul>
       </div>
+
+
+
       `;
 }

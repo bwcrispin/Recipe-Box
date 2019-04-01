@@ -61,13 +61,11 @@ events.on(getAppContext(), 'click', () => {
 })
 
 events.on(getAppContext(), 'click', () => {
-  if (event.target.classList.contains('js-delete-recipe')) {
+  if (event.target.classList.contains('js-update-recipe')) {
 
-      api.deleteRequest(`http://localhost:8080/recipes/delete/${event.target.id}`, {
-      }, category => getAppContext().innerHTML = Category(category))
-
+    api.putRequest(`http://localhost:8080/recipes/update/${event.target.id}`, {
+    }, category => getAppContext().innerHTML = Category(category))
   }
-
 })
 
 events.on(getAppContext(), 'click', () => {
@@ -77,9 +75,9 @@ events.on(getAppContext(), 'click', () => {
     api.postRequest(`http://localhost:8080/recipes/edit/${event.target.id}`, {
       instructions: instructions
     }, recipe => getAppContext().innerHTML = Recipe(recipe))
+
   }
 })
-
 
 }
 
