@@ -282,7 +282,7 @@ var _ingredients = _interopRequireDefault(require("./ingredients"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Recipe(recipe) {
-  return "\n  <button class=\"js-delete-recipe\" id=\"".concat(recipe.id, "\">Delete this Recipe</button>\n  <button class=\"js-update-recipe\" id=\"").concat(recipe.id, "\">Update this Recipe</button>\n    <img src=\"").concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n  ");
+  return "\n  <button class=\"js-delete-recipe\" id=\"".concat(recipe.id, "\">Delete this Recipe</button>\n  <button class=\"js-update-recipe\" id=\"").concat(recipe.id, "\">Update this Recipe</button>\n    <img src=\"").concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n    <section class=\"submit\">\n      <h3>Edit recipe instructions!</h3>\n      <input type=\"text\" class=\"js-edit-recipe__instructions\" placeholder=\"New Instructions\"/>\n      <button class=\"js-update-instructions__submit\" id=\"").concat(recipe.id, "\">Make Changes</button>\n  </section>\n\n  ");
 }
 },{"./ingredients":"js/components/ingredients.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
@@ -357,9 +357,13 @@ function main() {
   });
 
   _eventActions.default.on(getAppContext(), 'click', function () {
-    if (event.target.classList.contains('js-update-recipe')) {
-      _apiActions.default.putRequest("http://localhost:8080/recipes/update/".concat(event.target.id), {}, function (category) {
-        return getAppContext().innerHTML = (0, _Category.default)(category);
+    if (event.target.classList.contains('js-update-instructions__submit')) {
+      var instructions = document.querySelector('.js-edit-recipe__instructions').value;
+
+      _apiActions.default.postRequest("http://localhost:8080/recipes/edit/".concat(event.target.id), {
+        instructions: instructions
+      }, function (recipe) {
+        return getAppContext().innerHTML = (0, _recipe.default)(recipe);
       });
     }
   });
@@ -404,7 +408,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51592" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52373" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

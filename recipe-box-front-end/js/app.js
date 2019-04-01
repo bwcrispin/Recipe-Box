@@ -61,10 +61,12 @@ events.on(getAppContext(), 'click', () => {
 })
 
 events.on(getAppContext(), 'click', () => {
-  if (event.target.classList.contains('js-update-recipe')) {
+  if (event.target.classList.contains('js-update-instructions__submit')) {
+    const instructions = document.querySelector('.js-edit-recipe__instructions').value
 
-    api.putRequest(`http://localhost:8080/recipes/update/${event.target.id}`, {
-    }, category => getAppContext().innerHTML = Category(category))
+    api.postRequest(`http://localhost:8080/recipes/edit/${event.target.id}`, {
+    instructions: instructions  
+  }, recipe => getAppContext().innerHTML = Recipe(recipe))
   }
 })
 

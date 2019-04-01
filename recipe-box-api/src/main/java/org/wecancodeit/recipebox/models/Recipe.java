@@ -76,6 +76,11 @@ public class Recipe {
 		return category;
 	}
 
+	public void editInstructions(String newInstructions) {
+		this.instructions = newInstructions;
+		
+	}
+
 	
 	
 	

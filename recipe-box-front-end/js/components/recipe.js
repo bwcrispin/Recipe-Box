@@ -18,6 +18,12 @@ export default function Recipe(recipe) {
       <button class="js-add-ingredient__submit" id="${recipe.id}">Add Ingredient</button>
     </section>
 
+    <section class="submit">
+      <h3>Edit recipe instructions!</h3>
+      <input type="text" class="js-edit-recipe__instructions" placeholder="New Instructions"/>
+      <button class="js-update-instructions__submit" id="${recipe.id}">Make Changes</button>
+  </section>
+
   `
 
 }
