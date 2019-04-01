@@ -61,16 +61,6 @@ events.on(getAppContext(), 'click', () => {
 })
 
 events.on(getAppContext(), 'click', () => {
-  if (event.target.classList.contains('js-delete-recipe')) {
-
-      api.deleteRequest(`http://localhost:8080/recipes/delete/${event.target.id}`, {
-      }, category => getAppContext().innerHTML = Category(category))
-
-  }
-
-})
-
-events.on(getAppContext(), 'click', () => {
   if (event.target.classList.contains('js-update-recipe')) {
 
     api.putRequest(`http://localhost:8080/recipes/update/${event.target.id}`, {
@@ -78,6 +68,13 @@ events.on(getAppContext(), 'click', () => {
   }
 })
 
+events.on(getAppContext(), 'click', () => {
+  if (event.target.classList.contains('js-delete-recipe__submit')) {
+
+    api.postRequest(`http://localhost:8080/recipes/delete/${event.target.id}`, {
+    }, category => getAppContext().innerHTML = Category(category))
+  }
+})
 
 }
 

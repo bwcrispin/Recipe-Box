@@ -27,7 +27,7 @@ public class Recipe {
 	@Lob
 	private String recipeImage;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "recipes")
 	private Collection<Ingredient> ingredients;
 	
 	@ManyToOne 
@@ -67,10 +67,16 @@ public class Recipe {
 	public void addIngredient(Ingredient ingredient) {
 		ingredients.add(ingredient);
 	}
+
+	public void removeIngredientsInCollection() {
+		ingredients.removeAll(ingredients);
+	}
 	
 	public Category getCategory() {
 		return category;
 	}
+
+	
 	
 	
 }

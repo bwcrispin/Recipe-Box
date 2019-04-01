@@ -53,6 +53,11 @@ public class Category {
 		recipes.add(recipe);
 	}
 	
+	public void removeRecipe(Recipe recipe) {
+		recipes.remove(recipe);
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Categories [id=" + id + ", category=" + category + "]";
