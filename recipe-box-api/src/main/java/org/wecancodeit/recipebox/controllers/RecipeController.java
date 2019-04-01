@@ -60,6 +60,17 @@ public class RecipeController {
 		return categoryToAddTo;
 	}
 	
+	@PostMapping("/edit/{id}")
+    public Recipe editRecipie(@PathVariable Long id, @RequestBody String body) throws JSONException {
+        Recipe recipeToReplace = recipeRepo.findById(id).get();
+        JSONObject json = new JSONObject(body);
+//		String instructions = json.getString("instructions");
+        String Instructions = json.getString("newInstructions");
+        recipeToReplace.editInstructions(Instructions);
+        recipeRepo.save(recipeToReplace);
+        return recipeToReplace;
+    }
+	
 	@DeleteMapping("/delete/{id}")
 	public Category deleteRecipe(@PathVariable Long id) throws JSONException {
 		Recipe recipeToDelete = recipeRepo.findById(id).get();
@@ -73,16 +84,7 @@ public class RecipeController {
 		return category;
 	}
 	
-	@PutMapping("/edit/{id}")
-    public Recipe editRecipie(@PathVariable Long id, @RequestBody String body) throws JSONException {
-        Recipe recipeToReplace = recipeRepo.findById(id).get();
-        JSONObject replaceRecipe = new JSONObject(body);
-		String instructions = replaceRecipe.getString("instructions");
-        String newInstructions = replaceRecipe.getString("newInstructions");
-        recipeToReplace.editInstructions(newInstructions);
-        recipeRepo.save(recipeToReplace);
-        return recipeToReplace;
-    }
+	
 	
 
 }

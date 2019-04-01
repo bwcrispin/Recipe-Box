@@ -383,7 +383,7 @@ function main() {
     if (event.target.classList.contains('js-update-recipe__submit')) {
       var instructions = document.querySelector('.js-update-recipe__instructions').value;
 
-      _apiActions.default.putRequest("http://localhost:8080/recipes/edit/".concat(event.target.id), {
+      _apiActions.default.postRequest("http://localhost:8080/recipes/edit/".concat(event.target.id), {
         // recipeName: recipeName,
         // recipeImage: recipeImage,
         instructions: instructions
@@ -425,7 +425,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64424" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53043" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
