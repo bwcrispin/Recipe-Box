@@ -27,7 +27,7 @@ public class Recipe {
 	@Lob
 	private String recipeImage;
 	
-	@ManyToMany(mappedBy = "recipes")
+	@ManyToMany
 	private Collection<Ingredient> ingredients;
 	
 	@ManyToOne 
