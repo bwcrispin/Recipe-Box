@@ -72,12 +72,13 @@ public class RecipeController {
 		return category;
 	}
 	
-	
-	
-//	@PutMapping("/update/{id}")
-//	public Category updateRecipe(@PathVariable Long id) throws JSONException {
-//		
-//	}
-	
-
+	@PostMapping("/edit/{id}")
+    public Recipe editRecipie(@PathVariable Long id, @RequestBody String body) throws JSONException {
+        Recipe recipeToUpdate = recipeRepo.findById(id).get();
+        JSONObject json = new JSONObject(body);
+        String newInstructions = json.getString("instructions");
+        recipeToUpdate.editInstructions(newInstructions);
+        recipeRepo.save(recipeToUpdate);
+        return recipeToUpdate;
+    }
 }
