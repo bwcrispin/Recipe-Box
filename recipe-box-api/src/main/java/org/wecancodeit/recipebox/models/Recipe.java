@@ -78,5 +78,7 @@ public class Recipe {
 
 	
 	
-	
+	public void editInstructions(String newInstructions) {
+        this.instructions = newInstructions;
+    }
 }
