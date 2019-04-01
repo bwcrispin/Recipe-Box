@@ -74,9 +74,7 @@ events.on(getAppContext(), 'click', () => {
   if (event.target.classList.contains('js-update-recipe__submit')) {
     const instructions = document.querySelector('.js-update-recipe__instructions').value
 
-    api.putRequest(`http://localhost:8080/recipes/edit/${event.target.id}`, {
-      // recipeName: recipeName,
-      // recipeImage: recipeImage,
+    api.postRequest(`http://localhost:8080/recipes/edit/${event.target.id}`, {
       instructions: instructions
     }, recipe => getAppContext().innerHTML = Recipe(recipe))
   }

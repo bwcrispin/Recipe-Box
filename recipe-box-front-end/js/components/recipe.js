@@ -1,8 +1,9 @@
 import Ingredients from './ingredients'
 
 export default function Recipe(recipe) {
+  console.log(recipe)
   return `
-  <button class="js-delete-recipe" id="${recipe.id}">Delete this Recipe</button>
+ 
     <img src="${recipe.recipeImage}" alt="app image"/>
     <h2>${recipe.recipeName}</h2>   
     <ul>
