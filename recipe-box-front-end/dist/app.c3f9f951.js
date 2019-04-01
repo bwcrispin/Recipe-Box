@@ -282,7 +282,7 @@ var _ingredients = _interopRequireDefault(require("./ingredients"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Recipe(recipe) {
-  return "\n  <button class=\"js-delete-recipe\" id=\"".concat(recipe.id, "\">Delete this Recipe</button>\n  <button class=\"js-update-recipe\" id=\"").concat(recipe.id, "\">Update this Recipe</button>\n    <img src=\"").concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n    <section class=\"submit\">\n      <h3>Edit recipe instructions!</h3>\n      <input type=\"text\" class=\"js-edit-recipe__instructions\" placeholder=\"New Instructions\"/>\n      <button class=\"js-update-instructions__submit\" id=\"").concat(recipe.id, "\">Make Changes</button>\n  </section>\n\n  ");
+  return "\n  \n    <img src=\"".concat(recipe.recipeImage, "\" alt=\"app image\"/>\n    <h2>").concat(recipe.recipeName, "</h2>   \n    <ul>\n      <li>").concat((0, _ingredients.default)(recipe.ingredients), "</li>\n      <li>").concat(recipe.instructions, "</li>\n    </ul>\n\n    <section class=\"submit\">\n      <h3>Add ingredients to this recipe!</h3>\n      <input type=\"text\" class=\"js-submit-ingredient__measurement\" placeholder=\"Measurement\"/>\n      <input type=\"text\" class=\"js-submit-ingredient__ingredientName\" placeholder=\"Ingredient\"/>\n      <button class=\"js-add-ingredient__submit\" id=\"").concat(recipe.id, "\">Add Ingredient</button>\n    </section>\n\n    <section class=\"submit\">\n      <h3>Edit recipe instructions!</h3>\n      <input type=\"text\" class=\"js-edit-recipe__instructions\" placeholder=\"New Instructions\"/>\n      <button class=\"js-update-instructions__submit\" id=\"").concat(recipe.id, "\">Make Changes</button>\n  </section>\n\n  ");
 }
 },{"./ingredients":"js/components/ingredients.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
@@ -408,7 +408,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52373" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52724" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
